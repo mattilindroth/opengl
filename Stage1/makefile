@@ -23,8 +23,8 @@ LINKED_LIBS = -lglfw3 -lopengl32 -lgdi32
 all: directories $(BUILD_DIR)/$(TARGET)
 
 directories :
-		if not exist ./$(BUILD_DIR) then @mkdir $(BUILD_DIR)
-		if not exist ./$(OBJ_DIR) then @mkdir $(OBJ_DIR)
+		if not exist $(BUILD_DIR) (mkdir $(BUILD_DIR))
+		if not exist $(OBJ_DIR) (mkdir $(OBJ_DIR))
 
 # Compile the target
 #$@ means the target. $^ means all prerequisites (objects)
