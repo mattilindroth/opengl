@@ -1,6 +1,12 @@
+
+#define GLEW_STATIC
+
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <iostream>
 
 using namespace std;
+
 
 int main(void)
 {
@@ -20,6 +26,11 @@ int main(void)
 
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
+    GLenum err = glewInit();
+    if(err != GLEW_OK) {
+        cout << "Error while initializing Glew! glewInit returned " << err << endl;
+        return 0;
+    }
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))

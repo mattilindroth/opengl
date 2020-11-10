@@ -10,15 +10,15 @@ OBJ_FILES = main.o
 OBJS = $(patsubst %,$(OBJ_DIR)/%,$(OBJ_FILES))
 
 #Libraries linked
-LIB_DIR = -L dependencies/GLFW/lib
+LIB_DIR = -L dependencies/GLFW/lib -L dependencies/GLEW/lib
 
 #Include file search directories
-INC_DIR = -I dependencies/GLFW/include
+INC_DIR = -I dependencies/GLFW/include -I dependencies/GLEW/include
 
 #Flags for the compiler
 CC = g++
 CFLAGS = -Wall -Werror $(INC_DIR) $(LIB_DIR) 
-LINKED_LIBS = -lglfw3 -lopengl32 -lgdi32
+LINKED_LIBS = -lglew32 -lglfw3 -lopengl32 -lgdi32 
 
 all: directories $(BUILD_DIR)/$(TARGET)
 
