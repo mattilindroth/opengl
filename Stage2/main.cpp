@@ -5,6 +5,22 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <string>
+#include <fstream>
+#include <streambuf>
+
+static std::string LoadFile(const std::string fullFileName) {
+    std::ifstream file(fullFileName);
+    std::string str;
+
+    file.seekg(0, std::ios::end);
+    str.reserve(file.tellg());
+    file.seekg(0, std::ios::beg);
+
+    str.assign(std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>());
+
+    file.close();
+    return str;
+}
 
 static unsigned int CompileShader(unsigned int  type, const std::string& source)
 {
@@ -87,21 +103,13 @@ int main(void)
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
 
-    std::string vertexShader = "#version 330 core\n"
-        "\n"
-        "layout(location = 0) out vec4 position\n"
-        "void main()\n"
-        "{\n"
-        "   color = vec4(1.0, 0.0, 0.0, 1.0);\n"
-        "}\n";
+    std::string vertexShader = LoadFile("res/shaders/vertex.shader");
+    std::string fragmentShader = LoadFile("res/shaders/fragment.shader");
+    std::cout << "VERTEX: " << std::endl;
+    std::cout << vertexShader << std::endl << std::endl;
 
-    std::string fragmentShader = "#version 330 core\n"
-        "\n"
-        "layout(location = 0) in vec4 position\n"
-        "void main()\n"
-        "{\n"
-        "   gl_Position = position\n"
-        "}\n";
+    std::cout << "FRAGMENT: " << std::endl;
+    std::cout << fragmentShader << std::endl;
 
     unsigned int shader = CreateShader(vertexShader, fragmentShader);
     glUseProgram(shader);
