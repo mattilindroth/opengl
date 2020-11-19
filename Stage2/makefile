@@ -18,7 +18,7 @@ INC_DIR = -I dependencies/GLFW/include -I dependencies/GLEW/include
 #Flags for the compiler
 CC = g++
 CFLAGS = -Wall -Werror $(INC_DIR) $(LIB_DIR) 
-LINKED_LIBS = -lglew32 -lglfw3 -lopengl32 -lgdi32 
+LINKED_LIBS = -lglew32 -lglfw3 -lopengl32 -lgdi32
 
 all: directories $(BUILD_DIR)/$(TARGET)
 
